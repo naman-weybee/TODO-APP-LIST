@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/545dba8608.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <main>
+        <div class="heading">
+            <h2>TODO LIST</h2>
+        </div>
+        <div class="box"><span class="box-btn"><input type="textbox" class="text" name="boxBtn"></span></div>
+        <div class="taskmain">
+            <div class="message">No data found</div>
+            <div class="taskList">
+                <div class='taskName'>
+                    <input type="checkbox" class="check">a
+                </div>
+                <div class="edits">
+                    <button class="edit"><i class="fa fa-edit" id="edit-a"></i></button>
+                    <button class="delete"><i class="fa-solid fa-delete-left deletebtn"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="allOther">
+            <div class="add-search-btn">
+                <div><button class="add-btn  add btn--0 btn "><i class="fa fa-plus" aria-hidden="true"></i></button>
+                </div>
+                <div><button class="search-btn search btn--1 btn"><i class="fa fa-search search"
+                            aria-hidden="true"></i></button></div>
+            </div>
+            <div class="drop-downs">
+                <div class=" action">
+                    <button class="action-btn">
+                        <select value="action" class="actionS">
+                            <option value="act" class="action--a" selected>Action</option>
+                            <option value="selectAll" class="select">Select All</option>
+                            <option value="unselectAll" class="un-select">Unselect All</option>
+                            <option value="deselectAll" class="deleteselect">Delete all selected</option>
+                        </select>
+                    </button>
+
+                </div>
+                <div class="sorting">
+                    <button class="sort-btn">
+                        <select value='sort' class="sort">
+                            <option value="sort" class="Sort" selected>Sort</option>
+                            <option value="A-Z" class="A-Z">A-Z</option>
+                            <option value="Z-A" class="Z-A">Z-A</option>
+                            <option value="newest" class="newest">NEWEST</option>
+                            <option value="oldest" class="oldest">OLDEST</option>
+                        </select>
+
+                    </button>
+
+                </div>
+            </div>
+
+            <ul class="all-btn ">
+                <li class="all-a-btn btn--0 ">ALL</button></li>
+                <li class="active-a-btn btn--1">Active</button></li>
+                <li class="completed-a-btn btn--2">Completed</button></li>
+            </ul>
+
+        </div>
+    </main>
+    <script src="script.js"></script>
+
+</body>
+
+</html>
