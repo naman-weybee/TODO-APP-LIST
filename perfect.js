@@ -99,14 +99,13 @@ btnAdd.addEventListener('click', function () {
     btnAdd.classList.add('btn--active')
     btnSearch.classList.remove('btn--active')
     box.style.display = 'block'
-});
-
+})
 btnSearch.addEventListener('click', function () {
     active = 1;
     btnAdd.classList.remove('btn--active')
     btnSearch.classList.add('btn--active')
     //box.style.display='block'
-});
+})
 
 // ------------------------------------------------------------- Tab Flag Value -------
 function main() {
@@ -127,14 +126,13 @@ function closeBox(i) {
     editFlag = 0;
     container.innerHTML = '';
     displayMovements(movements);
-    sortings(tasks);
 }
 
 // ------------------------------------------------------------- Check -------
 function checks(i) {
     const index = movements.findIndex(x => x.id === i)
     movements[index].checked = !movements[index].checked
-    console.log(movements)
+    console.log(movements) 
     //main() 
 
     if (movements[index].checked) {
@@ -174,47 +172,35 @@ function deletes(i) {
     sortings(tasks);
 }
 
-// ------------------------------------------------------------- Edit btn -------
+// ------------------------------------------------------------- Edit Input -------
 function edits(i) {
     editFlag = true
     currentId = i
     displayMovements(movements);
-    sortings(tasks);
-    if (searched) {
-        input = text.value.trim();
-        tasks = tasks.filter(el => el.name.startsWith(input));
+    if(searched){
+        tasks = tasks.filter(el => el.id === i);
         displayMovements(tasks);
-        sortings(tasks);
     }
 }
 
-// ------------------------------------------------------------- Edit on Enter -------
 function editEnter(e) {
     input = document.querySelector('.texts').value.trim();
     if (e.key === 'Enter') {
         if (input) {
-            if (!searched) {
-                const index = movements.findIndex(el => el.id === currentId);
-                movements[index].name = document.querySelector('.texts').value;
-                editFlag = false;
-                currentId = 0;
-                displayMovements(movements);
-                sortings(tasks);
-            } else if (searched) {
-                const index = tasks.findIndex(el => el.id === currentId);
-                tasks[index].name = document.querySelector('.texts').value;
-                editFlag = false;
-                currentId = 0;
-                let singleTask = tasks.splice().filter(el => el.name.startsWith(document.querySelector('.text').value.trim()));
-                displayMovements(singleTask);
-            }
+            const index = movements.findIndex(el => el.id === currentId)
+            movements[index].name = document.querySelector('.texts').value
+            editFlag = false;
+            currentId = 0
+            displayMovements(movements)
         }
     }
 }
 
 // ------------------------------------------------------------- Add Input -------
 const add = function () {
-    input = text.value.trim();
+    input = text.value;
+    //let checked = false
+    input = input.trim();
     if (input) {
         movements.push({ id: ++ids, name: input, checked: false });
         console.log(movements)
@@ -229,7 +215,7 @@ const add = function () {
 
 // ------------------------------------------------------------- Search Input -------
 const search = function () {
-    main();
+    main()
     input = text.value.toLowerCase().trim();
     searched = tasks.filter(el => el.name.startsWith(input));
     if (input == '') {
@@ -242,7 +228,7 @@ const search = function () {
 // ------------------------------------------------------------- Sorting -------
 function sortings(task) {
     let sorting = sort.options[sort.selectedIndex].value;
-    console.log(sorting);
+    console.log(sorting)
     switch (sorting) {
         case "A-Z":
             //sort.selectedIndex=0
@@ -297,9 +283,9 @@ function sortings(task) {
 }
 
 sort.addEventListener('click', function () {
-    main();
-    c = 0;
-    sortings(tasks);
+    main()
+    c = 0
+    sortings(tasks)
 })
 
 // ------------------------------------------------------------- Actions -------
@@ -412,8 +398,8 @@ action.addEventListener('click', function () {
                     searched = searched.filter(el => el.checked == true)
                     console.log(searched)
                     searched.forEach(eli => {
-                        const index = tasks.findIndex(x => x.id == eli.id);
-                        let i = tasks[index].id;
+                        const index = tasks.findIndex(x => x.id == eli.id)
+                        let i = tasks[index].id
                         console.log(i)
                         console.log(movements)
                         tasks = tasks.filter(el => el.id !== i)
@@ -424,7 +410,8 @@ action.addEventListener('click', function () {
                 else {
                     tasks = tasks.filter(el => el.checked == false)
                     movements = movements.filter(el => el.checked == false)
-                    displayMovements(tasks);
+                    displayMovements(tasks)
+
                 }
 
             }
@@ -446,108 +433,58 @@ action.addEventListener('click', function () {
 btnAll.addEventListener('click', function () {
     allbtn = 0
     console.log(allbtn)
-    main();
+    main()
     //sortings()
+
     btnAll.classList.add('btn--active')
     btnActive.classList.remove('btn--active')
     btnCompleted.classList.remove('btn--active')
-    // if (c == 0) {
-    //     sortings(tasks)
-    // }
-    // else {
-    //     displayMovements(tasks)
-    // }
-
-    if (searched) {
-        main();
-        input = text.value.toLowerCase().trim();
-        searched = tasks.filter(el => el.name.startsWith(input));
-        if (input == '') {
-            displayMovements(tasks);
-        } else {
-            displayMovements(searched);
-        }
-    }else{
-        if (c == 0) {
-            sortings(tasks)
-        }
-        else {
-            displayMovements(tasks)
-        }
+    if (c == 0) {
+        sortings(tasks)
     }
-});
+    else {
+        displayMovements(tasks)
+    }
 
+})
 btnActive.addEventListener('click', function () {
-    main();
     allbtn = 1
     //sortings()
     console.log(allbtn)
     btnAll.classList.remove('btn--active')
     btnActive.classList.add('btn--active')
     btnCompleted.classList.remove('btn--active')
+    main()
     array = tasks.filter(el => el.checked == false)
-    // if (c == 0) {
-    //     sortings(array)
-    // }
-    // else {
-    //     displayMovements(array)
-    // }
-
-    if (searched) {
-        main();
-        input = text.value.toLowerCase().trim();
-        searched = tasks.filter(el => el.name.startsWith(input));
-        if (input == '') {
-            displayMovements(tasks);
-        } else {
-            displayMovements(searched);
-        }
-    }else{
-        if (c == 0) {
-            sortings(array)
-        }
-        else {
-            displayMovements(array)
-        }
+    if (c == 0) {
+        sortings(array)
     }
-});
+    else {
+        displayMovements(array)
+    }
 
+})
 btnCompleted.addEventListener('click', function () {
-    main();
     allbtn = 2
     //sortings()
     console.log(allbtn)
     btnAll.classList.remove('btn--active')
     btnActive.classList.remove('btn--active')
     btnCompleted.classList.add('btn--active')
+    main()
+
+
     //sortings(tasks)
     array = tasks.filter(el => el.checked == true);
-    // if (c == 0) {
-    //     sortings(array)
-    // }
-    // else {
-    //     displayMovements(array)
-    // }
-
-    if (searched) {
-        main();
-        input = text.value.toLowerCase().trim();
-        searched = tasks.filter(el => el.name.startsWith(input));
-        if (input == '') {
-            displayMovements(tasks);
-        } else {
-            displayMovements(searched);
-        }
-    }else{
-        if (c == 0) {
-            sortings(array)
-        }
-        else {
-            displayMovements(array)
-        }
+    if (c == 0) {
+        sortings(array)
+    }
+    else {
+        displayMovements(array)
     }
 
-});
+})
+
 
 boxBtn.addEventListener('keyup', function (e) {
     if (e.key == 'Enter') {
@@ -564,4 +501,4 @@ boxBtn.addEventListener('keyup', function (e) {
     else if (active == 1) {
         search();
     }
-});
+})
