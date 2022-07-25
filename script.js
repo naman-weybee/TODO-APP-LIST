@@ -68,12 +68,9 @@ const displayMovements = function (movements) {
     if (movements.length === 0) {
         const msgs = `<div class="message">No data found</div>`;
         container.insertAdjacentHTML('beforeend', msgs);
-        // msg.style.display = "block";
     }
     else {
-        // msg.style.display = "none";
         movements.forEach(item => {
-            console.log(item)
             const html = `
             <div class="taskList">
             <div class = 'taskName'>
@@ -105,7 +102,6 @@ btnSearch.addEventListener('click', function () {
     active = 1;
     btnAdd.classList.remove('btn--active')
     btnSearch.classList.add('btn--active')
-    //box.style.display='block'
 });
 
 // ------------------------------------------------------------- Tab Flag Value -------
@@ -134,19 +130,13 @@ function closeBox(i) {
 function checks(i) {
     const index = movements.findIndex(x => x.id === i)
     movements[index].checked = !movements[index].checked
-    console.log(movements)
-    //main() 
 
     if (movements[index].checked) {
-        console.log("hello")
         array = movements.filter(el => el.checked == false)
-        console.log(array)
-        // displayMovements(array)
         if (allbtn == 1) {
             displayMovements(array)
         }
         else {
-            console.log('helllo')
             sortings(movements)
         }
     }
@@ -160,7 +150,6 @@ function checks(i) {
     if (task.length > 0) {
         if (task[index].checked) {
             array = task.filter(el => el.checked == false)
-            console.log(array)
             displayMovements(array)
         }
     }
@@ -217,10 +206,8 @@ const add = function () {
     input = text.value.trim();
     if (input) {
         movements.push({ id: ++ids, name: input, checked: false });
-        console.log(movements)
         displayMovements(movements);
     }
-    console.log(movements);
     btnAll.classList.add('btn--active');
     btnActive.classList.remove('btn--active');
     btnCompleted.classList.remove('btn--active');
@@ -242,10 +229,8 @@ const search = function () {
 // ------------------------------------------------------------- Sorting -------
 function sortings(task) {
     let sorting = sort.options[sort.selectedIndex].value;
-    console.log(sorting);
     switch (sorting) {
         case "A-Z":
-            //sort.selectedIndex=0
             task = tasks.slice().sort((a, b) => {
                 if (a.name < b.name) {
                     return -1
@@ -259,11 +244,8 @@ function sortings(task) {
                 }
             })
             displayMovements(task)
-            console.log(task)
-            console.log(movements)
             break;
         case 'Z-A':
-            //sort.selectedIndex=0
             task = tasks.slice().sort((a, b) => {
                 if (b.name < a.name) {
                     return -1
@@ -279,21 +261,18 @@ function sortings(task) {
             displayMovements(task);
             break;
         case 'newest':
-            //sort.selectedIndex=0
             task = tasks.slice().sort((a, b) => {
                 return b.id - a.id
             })
             displayMovements(task)
             break;
         case "oldest":
-            // sort.selectedIndex=0
 
             task = tasks.slice().sort((a, b) => a.id - b.id)
             displayMovements(task)
             break;
 
     }
-    //return task
 }
 
 sort.addEventListener('click', function () {
@@ -306,7 +285,6 @@ sort.addEventListener('click', function () {
 action.addEventListener('click', function () {
     main()
     let actions = action.options[action.selectedIndex].value;
-    console.log(actions)
 
     switch (actions) {
         case "selectAll":
@@ -341,21 +319,18 @@ action.addEventListener('click', function () {
                 }
                 else {
                     if (allbtn == 1) {
-                        console.log('how are u')
                         el.checked = true
                         array = tasks.filter(el => el.checked == false)
                         displayMovements(array)
 
                     }
                     else {
-                        console.log('how are u 5555')
                         el.checked = true
                         displayMovements(tasks)
                     }
 
                 }
             })
-            console.log(tasks)
             break;
         case 'unselectAll':
             action.selectedIndex = 0
@@ -387,14 +362,12 @@ action.addEventListener('click', function () {
                 }
                 else {
                     if (allbtn == 2) {
-                        console.log('how are u')
                         el.checked = false
                         array = tasks.filter(el => el.checked == true)
                         displayMovements(array)
 
                     }
                     else {
-                        console.log('how are u 5555')
                         el.checked = false
                         displayMovements(tasks)
                     }
@@ -402,20 +375,15 @@ action.addEventListener('click', function () {
                 }
 
             })
-            console.log(movements)
             break;
         case "deselectAll":
             action.selectedIndex = 0
             if (active == 1) {
                 if (searched) {
-                    console.log(searched)
                     searched = searched.filter(el => el.checked == true)
-                    console.log(searched)
                     searched.forEach(eli => {
                         const index = tasks.findIndex(x => x.id == eli.id);
                         let i = tasks[index].id;
-                        console.log(i)
-                        console.log(movements)
                         tasks = tasks.filter(el => el.id !== i)
                         movements = movements.filter(el => el.id !== i)
                         displayMovements(tasks)
@@ -435,7 +403,6 @@ action.addEventListener('click', function () {
                 displayMovements(tasks)
             }
 
-            console.log(tasks)
             break;
         default:
 
@@ -445,19 +412,10 @@ action.addEventListener('click', function () {
 // ------------------------------------------------------------- Tabs -------
 btnAll.addEventListener('click', function () {
     allbtn = 0
-    console.log(allbtn)
     main();
-    //sortings()
     btnAll.classList.add('btn--active')
     btnActive.classList.remove('btn--active')
     btnCompleted.classList.remove('btn--active')
-    // if (c == 0) {
-    //     sortings(tasks)
-    // }
-    // else {
-    //     displayMovements(tasks)
-    // }
-
     if (searched) {
         main();
         input = text.value.toLowerCase().trim();
@@ -480,19 +438,10 @@ btnAll.addEventListener('click', function () {
 btnActive.addEventListener('click', function () {
     main();
     allbtn = 1
-    //sortings()
-    console.log(allbtn)
     btnAll.classList.remove('btn--active')
     btnActive.classList.add('btn--active')
     btnCompleted.classList.remove('btn--active')
     array = tasks.filter(el => el.checked == false)
-    // if (c == 0) {
-    //     sortings(array)
-    // }
-    // else {
-    //     displayMovements(array)
-    // }
-
     if (searched) {
         main();
         input = text.value.toLowerCase().trim();
@@ -515,19 +464,10 @@ btnActive.addEventListener('click', function () {
 btnCompleted.addEventListener('click', function () {
     main();
     allbtn = 2
-    //sortings()
-    console.log(allbtn)
     btnAll.classList.remove('btn--active')
     btnActive.classList.remove('btn--active')
     btnCompleted.classList.add('btn--active')
-    //sortings(tasks)
     array = tasks.filter(el => el.checked == true);
-    // if (c == 0) {
-    //     sortings(array)
-    // }
-    // else {
-    //     displayMovements(array)
-    // }
 
     if (searched) {
         main();
@@ -552,7 +492,6 @@ btnCompleted.addEventListener('click', function () {
 boxBtn.addEventListener('keyup', function (e) {
     if (e.key == 'Enter') {
         if (active == 0) {
-            console.log("active=0")
             add(movements);
             text.value = '';
             if (c == 0) {
